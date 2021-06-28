@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.a2c22081.chunk.css",
-    "main.js": "/static/js/main.454f83cf.chunk.js",
-    "main.js.map": "/static/js/main.454f83cf.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.0ff60531.js",
-    "runtime-main.js.map": "/static/js/runtime-main.0ff60531.js.map",
-    "static/js/2.717ab910.chunk.js": "/static/js/2.717ab910.chunk.js",
-    "static/js/2.717ab910.chunk.js.map": "/static/js/2.717ab910.chunk.js.map",
-    "static/js/3.f52dabac.chunk.js": "/static/js/3.f52dabac.chunk.js",
-    "static/js/3.f52dabac.chunk.js.map": "/static/js/3.f52dabac.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.a2c22081.chunk.css.map": "/static/css/main.a2c22081.chunk.css.map",
-    "static/js/2.717ab910.chunk.js.LICENSE.txt": "/static/js/2.717ab910.chunk.js.LICENSE.txt"
+    "main.css": "/Game0f15/static/css/main.a2c22081.chunk.css",
+    "main.js": "/Game0f15/static/js/main.454f83cf.chunk.js",
+    "main.js.map": "/Game0f15/static/js/main.454f83cf.chunk.js.map",
+    "runtime-main.js": "/Game0f15/static/js/runtime-main.442ef76b.js",
+    "runtime-main.js.map": "/Game0f15/static/js/runtime-main.442ef76b.js.map",
+    "static/js/2.4c9e0122.chunk.js": "/Game0f15/static/js/2.4c9e0122.chunk.js",
+    "static/js/2.4c9e0122.chunk.js.map": "/Game0f15/static/js/2.4c9e0122.chunk.js.map",
+    "static/js/3.f52dabac.chunk.js": "/Game0f15/static/js/3.f52dabac.chunk.js",
+    "static/js/3.f52dabac.chunk.js.map": "/Game0f15/static/js/3.f52dabac.chunk.js.map",
+    "index.html": "/Game0f15/index.html",
+    "static/css/main.a2c22081.chunk.css.map": "/Game0f15/static/css/main.a2c22081.chunk.css.map",
+    "static/js/2.4c9e0122.chunk.js.LICENSE.txt": "/Game0f15/static/js/2.4c9e0122.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.0ff60531.js",
-    "static/js/2.717ab910.chunk.js",
+    "static/js/runtime-main.442ef76b.js",
+    "static/js/2.4c9e0122.chunk.js",
     "static/css/main.a2c22081.chunk.css",
     "static/js/main.454f83cf.chunk.js"
   ]
