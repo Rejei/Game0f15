@@ -32,7 +32,7 @@ const handleclick = () => {
 
 }
 
-    const TableRows: FC<RowsType> = ({ length,  resultTime, grid}) => {
+    const TableRows: FC<RowsType> = ({ length,  resultTime, grid}): JSX.Element => {
     
         let [h, min , sec] =  resultTime[resultTime.length-1]
 
