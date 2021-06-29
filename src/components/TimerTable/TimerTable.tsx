@@ -33,12 +33,11 @@ const handleclick = () => {
 }
 
     const TableRows: FC<RowsType> = ({ length,  resultTime, grid}): JSX.Element => {
-    
-        let [h, min , sec] =  resultTime[resultTime.length-1]
+    console.log(resultTime)
 
         return <Table.Row >
-            <Table.Cell>{grid[grid.length-1]}</Table.Cell>
-            <Table.Cell>{`${h}.${min}.${sec}`}</Table.Cell>
+            {grid.map((el, index) => <Table.Cell key={index}>{el}</Table.Cell>)}
+           {resultTime.map((el, index) => <Table.Cell key={index}>{`${el[0]}.${el[1]}.${el[2]}`}</Table.Cell>) }
         </Table.Row>
     }
 
