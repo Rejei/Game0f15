@@ -17,7 +17,7 @@ type Props = {
   arr: Array<number>
   movement: SetMovementType
   start: 'Disabled' | 'Start' | 'Restart'
-  presetArr: Array<number>
+  presetArr: Array<string>
   setGrid: (arg0: Array<number>) => void
   setStart: (arg0: 'Disabled' | 'Start' | 'Restart') => void
   setPresetArr: (arg0: Array<string>) => void
@@ -123,7 +123,7 @@ type MapStatePropsType = {
   arr: Array<number>,
   movement: SetMovementType,
   start: string,
-  presetArr: Array<number>,
+  presetArr: Array<string>,
   startGame: boolean,
   success: boolean,
   resultTime: Array<Array<number>>

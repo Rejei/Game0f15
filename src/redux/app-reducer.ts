@@ -13,7 +13,7 @@ type InitialState = {
     arr: Array<number>
     movement: SetMovementType
     start: 'Disabled' | 'Start' | 'Restart'
-    presetArr: Array<number>
+    presetArr: Array<string>
     startGame: boolean
     success: boolean
 }
@@ -86,7 +86,7 @@ type ActionTypes = ReturnType<typeof setGrid> | ReturnType<typeof setMovement> |
         {type: SET_START_GAME, payload: {startGame}} as const
     )
 
-    export const setPresetArr = (presetArr: Array<number>) => (
+    export const setPresetArr = (presetArr: Array<string>) => (
         {type: SET_PRESET_ARR, payload: {presetArr}
     } as const)
 

@@ -1,0 +1,12 @@
+tbody tr {
+    display: flex;
+    width: 100%;
+    
+}
+
+tbody tr td {
+    display: flex;
+    width: 50%;
+    height: 50%;
+    flex: 1;
+}

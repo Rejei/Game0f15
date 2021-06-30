@@ -4,25 +4,40 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Table } from 'semantic-ui-react';
 import { AppStateType } from '../../redux/redux-reducers';
+import './TimerTable.module.scss';
 
 type TableType = {
     resultTime: Array<Array<number>>
-    grid: Array<number>
+    grid: Array<string>
     direction: "ascending" | "descending" | undefined
 }
 
 type RowsType = {
     length: number
     resultTime: Array<Array<number>>
-    grid: Array<number>
+    grid: Array<string>
 }
+
+const TableRows: FC<RowsType> = ({ length,  resultTime, grid}): JSX.Element => {
+    let values = []
+for(let i = 0; i < grid.length; i++){
+    values.push([grid[i],resultTime[i]])
+
+}
+
+        return (
+            <Table.Body>
+                {values.map((el, i) => <Table.Row key={i}>
+                    <Table.Cell>{el[0]}</Table.Cell><Table.Cell>{`${el[1][0]}.${el[1][1]}.${el[1][2]}`}</Table.Cell>
+                </Table.Row>)}
+        </Table.Body>
+           )
+    }
+
 
 const TimerTable: FC<TableType & {className: string}> = ({resultTime, grid, direction }): JSX.Element => {
 
 const [lengthArr, setLengthArr] = useState(0)
-
-
-
 useEffect(()=> {
     setLengthArr(resultTime.length > grid.length ? grid.length : resultTime.length)
 },[grid.length, resultTime.length])
@@ -31,16 +46,6 @@ const handleclick = () => {
     console.log('tablerow')
 
 }
-
-    const TableRows: FC<RowsType> = ({ length,  resultTime, grid}): JSX.Element => {
-    console.log(resultTime)
-
-        return <Table.Row >
-            {grid.map((el, index) => <Table.Cell key={index}>{el}</Table.Cell>)}
-           {resultTime.map((el, index) => <Table.Cell key={index}>{`${el[0]}.${el[1]}.${el[2]}`}</Table.Cell>) }
-        </Table.Row>
-    }
-
     return <Table sortable celled fixed>
         <Table.Header>
             <Table.Row>
@@ -53,10 +58,8 @@ const handleclick = () => {
                 <Table.HeaderCell>Time</Table.HeaderCell>
             </Table.Row>
         </Table.Header>
-        <Table.Body>
             { resultTime.length > 0 ?  <TableRows resultTime={resultTime} length={lengthArr} grid={grid}/> : null
         }
-        </Table.Body>
     </Table>
 }
 
