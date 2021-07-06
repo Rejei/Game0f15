@@ -38,7 +38,8 @@ const timerReducer = (state = initialState, action: ActionTypes): InitialState =
                 resultTime: [...state.resultTime, ...[action.payload.resultTime]]
             }
         case CHANGE_SORT:
-            if (state.column === action.payload.column) {
+
+            if (state.column === action.payload) {
                 return {
                     ...state,
                     resultTime: state.resultTime.slice().reverse(),
@@ -49,8 +50,8 @@ const timerReducer = (state = initialState, action: ActionTypes): InitialState =
 
              return {
                  ...state,
-                column: action.payload.column,
-                resultTime: [sortBy(state.resultTime[setResultTime.length-1], action.payload.column)],
+                column: action.payload,
+                resultTime: [sortBy(state.resultTime.map(el => Number(el.join())))],
                 direction: 'ascending',
             } 
 
@@ -70,7 +71,7 @@ export const setTimer = (timer: {h: number, min: number, sec: number}) => (
         } as const )
 
 export const changeSort = (column: string) => (
-    { type: CHANGE_SORT, payload: { column } } as const
+    { type: CHANGE_SORT, payload: column } as const
 )
 
 export default timerReducer
