@@ -15,6 +15,7 @@ border-radius: 15%;
 align-items: center;
 justify-content: center;
 font-size: 4rem;
+user-select: none;
 &:hover {
   background-color: rgb(215, 215, 226);
   color: red;

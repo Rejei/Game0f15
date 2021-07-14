@@ -43,12 +43,14 @@
 }
 
 .success {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
-    top: 20%;
+    top: 5%;
     width: 100%;
-    text-align: center;
-    display: block;
-    font-size: 15vw;
+    max-height: 30%;
+    font-size: 500%;
     font-family: 'Fredoka One', cursive;
     background-color: blanchedalmond;
 }
