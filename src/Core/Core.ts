@@ -1,7 +1,8 @@
 import { setMovement } from "../redux/app-reducer";
+import { Result } from "../redux/timer-reducer";
 
 interface IParam {
-  (arg0: {h: Array<number>, v: Array<number>}): void;
+  (arg0: { h: Array<number>, v: Array<number> }): void;
 }
 
 export const possibleMove = (arr: Array<number>, setMovement: IParam): void => {
@@ -64,11 +65,10 @@ export const MoveAside = (arr: Array<number>, from: number, displace: Array<numb
       if (couple[1] === from) break;
     }
   }
-
   return swappedArr
 }
 
-export const randomizedGrid = (preset: string) : Array<number> => {
+export const randomizedGrid = (preset: string): Array<number> => {
   const gridSet: Set<number> = new Set();
   let rowLength = Math.sqrt(Number(preset));
   let zeroRow = 1;
@@ -101,7 +101,7 @@ export const randomizedGrid = (preset: string) : Array<number> => {
   return arrSet
 }
 
-const isSolved = (set: Array<number>) : number => {
+const isSolved = (set: Array<number>): number => {
   let solved = set.reduce((accumulator, currentValue, index, array) => {
     let result = 0
     for (index; index < array.length; index++) {
@@ -121,17 +121,41 @@ export const sortBy = (arr: Array<number>, sorting?: string): number[] => {
   if (sorting === undefined) {
     sorted.sort((a, b) => a - b)
     return sorted
+  } else if (sorting === 'ascending') {
+    const tempSorted = [...sorted]
+    sorted = []
+    let sortedToString: Array<Array<string>> = tempSorted.sort((a, b) => a - b).map(el => [el.toString()])
+
+    for (let i = 0; i < sortedToString.length; i++) {
+      while (sortedToString[i][0].length < 6) {
+        sortedToString[i][0] = '0' + sortedToString[i][0]
+      }
+      for (let j = 0; j < sortedToString[i][0].length; j += 2) {
+        sorted.push(Number(sortedToString[i][0][j] + sortedToString[i][0][j + 1]))
+      }
+    }
+    return sorted
   }
   return sorted
 }
 
-export const isDone = (arr: Array<number>) : boolean => {
-  const checkedArr = [...arr];
-
-  const arrDone = sortBy(arr)
-
-  arrDone.push(arrDone.shift()!)
-
-  return checkedArr.every((el, i) => el === arrDone[i])
+export const resultSorted = (arr: Array<number>, res: Result[]): Result[] => {
+  let newRes: Array<Result> = [],
+    i = 0
+  while (i < arr.length) {
+    for (let k = 0; k < res.length; k++) {
+      if (arr[i] === res[k].time[0]) {
+        newRes.push(res[k])
+      }
+      i++
+    }
+  }
+  return newRes;
 }
 
+export const isDone = (arr: Array<number>): boolean => {
+  const checkedArr = [...arr];
+  const arrDone = sortBy(arr)
+  arrDone.push(arrDone.shift()!)
+  return checkedArr.every((el, i) => el === arrDone[i])
+}

@@ -1,14 +1,17 @@
-import { sortBy } from "../Core/Core";
+import { resultSorted, sortBy } from "../Core/Core";
 
 const SET_TIMER = 'SET-TIMER';
 const CHANGE_SORT = 'CHANGE-SORT';
-const SET_RESULT_TIME = 'SET-RESULT-TIME';
+const SET_RESULT = 'SET-RESULT';
 
+export type Result = {
+    time: Array<number>, grid: string
+}
 type InitialState = {
-    timer: {h: number, min: number, sec: number}
+    timer: { h: number, min: number, sec: number }
     column: string
     direction: "ascending" | "descending" | undefined
-    resultTime: Array<Array<number>>
+    result: Array<Result>
 }
 
 let initialState: InitialState = {
@@ -19,56 +22,52 @@ let initialState: InitialState = {
     },
     column: '',
     direction: undefined,
-    resultTime: []
+    result: []
 }
 
-type ActionTypes = ReturnType<typeof setTimer> | ReturnType<typeof setResultTime> | ReturnType<typeof changeSort>
+type ActionTypes = ReturnType<typeof setTimer> | ReturnType<typeof setResult> | ReturnType<typeof changeSort>
 
 const timerReducer = (state = initialState, action: ActionTypes): InitialState => {
     switch (action.type) {
         case SET_TIMER:
             return {
                 ...state,
-               ...action.payload
-
+                ...action.payload
             }
-        case SET_RESULT_TIME:
+        case SET_RESULT:
             return {
                 ...state,
-                resultTime: [...state.resultTime, ...[action.payload.resultTime]]
+                result: [...state.result, ...action.payload.result]
             }
         case CHANGE_SORT:
-
             if (state.column === action.payload) {
                 return {
                     ...state,
-                    resultTime: state.resultTime.slice().reverse(),
+                    result: state.result.slice().reverse(),
                     direction:
                         state.direction === 'ascending' ? 'descending' : 'ascending',
                 }
             }
-
-             return {
-                 ...state,
+            return {
+                ...state,
                 column: action.payload,
-                resultTime: [sortBy(state.resultTime.map(el => Number(el.join())))],
+                result: resultSorted(sortBy(state.result.map(el => Number(el.time.join(''))), 'ascending'), state.result),
                 direction: 'ascending',
-            } 
-
+            }
         default:
             return state
     }
 }
 
-export const setTimer = (timer: {h: number, min: number, sec: number}) => (
+export const setTimer = (timer: { h: number, min: number, sec: number }) => (
     {
         type: SET_TIMER, payload: { timer }
-    } as const )
+    } as const)
 
-    export const setResultTime = (resultTime: Array<number>) => (
-        {
-            type: SET_RESULT_TIME, payload: { resultTime }
-        } as const )
+export const setResult = (result: Array<Result>) => (
+    {
+        type: SET_RESULT, payload: { result }
+    } as const)
 
 export const changeSort = (column: string) => (
     { type: CHANGE_SORT, payload: column } as const

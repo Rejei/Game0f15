@@ -38,3 +38,8 @@ border-radius: 10%;
     color: white;
     background-color: blue;
 }
+
+.options > button:disabled {
+    color: rgb(199, 44, 16);
+    background-color: rgb(199, 44, 16);
+}

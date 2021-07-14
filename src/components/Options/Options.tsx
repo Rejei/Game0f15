@@ -71,7 +71,7 @@ const Options: FC<OptionProps & {className: string}> = ({setPresetArr, setCounte
                 6*6
               </label>
           </div>
-                <button type='submit'>Set Up</button>
+                <button type='submit' disabled={submitting || pristine}>Set Up</button>
             </form>
         }} 
         />

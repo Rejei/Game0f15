@@ -1,72 +1,64 @@
-import React, { FC, MouseEventHandler, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
 import { Table } from 'semantic-ui-react';
 import { AppStateType } from '../../redux/redux-reducers';
+import { Result } from '../../redux/timer-reducer';
 import './TimerTable.module.scss';
 
 type TableType = {
-    resultTime: Array<Array<number>>
+    result: Array<Result>
     grid: Array<string>
     direction: "ascending" | "descending" | undefined
     column: string | undefined
 }
 
 type RowsType = {
-    length: number
-    resultTime: Array<Array<number>>
-    grid: Array<string>
+    result: Array<Result>
 }
 
-const TableRows: FC<RowsType> = ({ length,  resultTime, grid}): JSX.Element => {
-    let values = []
-for(let i = 0; i < length; i++){
-    values.push([grid[i],resultTime[i]])
-
-}
-        return (
-            <Table.Body>
-                {values.map((el, i) => <Table.Row key={i}>
-                    <Table.Cell>{el[0]}</Table.Cell><Table.Cell>{`${el[1][0]}.${el[1][1]}.${el[1][2]}`}</Table.Cell>
-                </Table.Row>)}
+const TableRows: FC<RowsType> = ({ result }): JSX.Element => {
+    return (
+        <Table.Body>
+            {result.map((el, index) => {
+                const h = Math.floor(el.time[0] / 3600) >= 10 ? Math.floor(el.time[0] / 3600) : `0${Math.floor(el.time[0] / 3600)}`
+                const min = Math.floor(el.time[0] % 3600 / 60) >= 10 ? Math.floor(el.time[0] % 3600 / 60) : `0${Math.floor(el.time[0] % 3600 / 60)}`
+                const sec = Math.floor(el.time[0] % 3600 % 60) >= 10 ? Math.floor(el.time[0] % 3600 % 60) : `0${Math.floor(el.time[0] % 3600 % 60)}`
+                return <Table.Row key={index}>
+                    <Table.Cell>{el.grid}</Table.Cell><Table.Cell>{`${h}.${min}.${sec}`}</Table.Cell>
+                </Table.Row>
+            })}
         </Table.Body>
-           )
-    }
+    )
+}
 
-
-const TimerTable: FC<TableType & {className: string}> = ({resultTime, grid, direction, column }): JSX.Element => {
-
+const TimerTable: FC<TableType & { className: string }> = ({ result, grid, direction, column }): JSX.Element => {
     const dispatch = useDispatch()
-const [lengthArr, setLengthArr] = useState(0)
-useEffect(()=> {
-    setLengthArr(resultTime.length > grid.length ? grid.length : resultTime.length)
-},[grid.length, resultTime.length])
-
 
     return <Table sortable celled fixed>
         <Table.Header>
             <Table.Row>
-                <Table.HeaderCell 
-                sorted ={ column === 'grid' ? direction : undefined}
-                onClick={() => dispatch({type: 'CHANGE-SORT', payload: 'grid'})}
+                <Table.HeaderCell
+                    sorted={column === 'grid' ? direction : undefined}
+                    onClick={() => dispatch({ type: 'CHANGE-SORT', payload: 'grid' })}
                 >
                     Grid
-                    </Table.HeaderCell>
+                </Table.HeaderCell>
                 <Table.HeaderCell
-                sorted={ column === 'time' ? direction : undefined}
-                onClick={() => dispatch({type: 'CHANGE-SORT', payload: 'time'})}
+                    sorted={column === 'time' ? direction : undefined}
+                    onClick={() => dispatch({ type: 'CHANGE-SORT', payload: 'time' })}
                 >
                     Time
-                    </Table.HeaderCell>
+                    {direction === 'ascending' ? <i className="fas fa-sort-up" /> : direction === 'descending' ? <i className="fas fa-sort-down" /> : null}
+                </Table.HeaderCell>
             </Table.Row>
         </Table.Header>
-            { resultTime.length > 0 ?  <TableRows resultTime={resultTime} length={lengthArr} grid={grid}/> : null
+        {result.length > 0 ? <TableRows result={result} /> : null
         }
     </Table>
 }
 
 const mapStateToProps = (state: AppStateType) => ({
-    resultTime: state.timer.resultTime,
     grid: state.game15.presetArr,
     direction: state.timer.direction,
     column: state.timer.column
