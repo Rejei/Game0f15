@@ -34,7 +34,7 @@ const Timer: FC<TimerProps> = ({ timer, startGame, setTimer, success, setResult,
             if (!success) {
                 setTimer({ h: Math.floor(time / 3600), min: Math.floor(time % 3600 / 60), sec: Math.floor(time % 3600 % 60) })
             } else if (success && time !== 0) {
-                setResult([{ time: [time], grid: grid[grid.length - 1] }])
+                setResult([{ time: time, grid: grid[grid.length - 1] }])
                 setTime(0)
                 setTimer({ h: 0, min: 0, sec: 0 })
             }

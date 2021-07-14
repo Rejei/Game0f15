@@ -5,7 +5,7 @@ const CHANGE_SORT = 'CHANGE-SORT';
 const SET_RESULT = 'SET-RESULT';
 
 export type Result = {
-    time: Array<number>, grid: string
+    time: number, grid: string
 }
 type InitialState = {
     timer: { h: number, min: number, sec: number }
@@ -51,7 +51,7 @@ const timerReducer = (state = initialState, action: ActionTypes): InitialState =
             return {
                 ...state,
                 column: action.payload,
-                result: resultSorted(sortBy(state.result.map(el => Number(el.time.join(''))), 'ascending'), state.result),
+                result: resultSorted(sortBy(state.result.map(el => el.time), 'ascending'), state.result),
                 direction: 'ascending',
             }
         default:

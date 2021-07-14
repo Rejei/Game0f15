@@ -144,7 +144,7 @@ export const resultSorted = (arr: Array<number>, res: Result[]): Result[] => {
     i = 0
   while (i < arr.length) {
     for (let k = 0; k < res.length; k++) {
-      if (arr[i] === res[k].time[0]) {
+      if (arr[i] === res[k].time) {
         newRes.push(res[k])
       }
       i++

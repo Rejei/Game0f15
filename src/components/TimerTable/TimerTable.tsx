@@ -21,9 +21,9 @@ const TableRows: FC<RowsType> = ({ result }): JSX.Element => {
     return (
         <Table.Body>
             {result.map((el, index) => {
-                const h = Math.floor(el.time[0] / 3600) >= 10 ? Math.floor(el.time[0] / 3600) : `0${Math.floor(el.time[0] / 3600)}`
-                const min = Math.floor(el.time[0] % 3600 / 60) >= 10 ? Math.floor(el.time[0] % 3600 / 60) : `0${Math.floor(el.time[0] % 3600 / 60)}`
-                const sec = Math.floor(el.time[0] % 3600 % 60) >= 10 ? Math.floor(el.time[0] % 3600 % 60) : `0${Math.floor(el.time[0] % 3600 % 60)}`
+                const h = Math.floor(el.time / 3600) >= 10 ? Math.floor(el.time / 3600) : `0${Math.floor(el.time / 3600)}`
+                const min = Math.floor(el.time % 3600 / 60) >= 10 ? Math.floor(el.time % 3600 / 60) : `0${Math.floor(el.time % 3600 / 60)}`
+                const sec = Math.floor(el.time % 3600 % 60) >= 10 ? Math.floor(el.time % 3600 % 60) : `0${Math.floor(el.time % 3600 % 60)}`
                 return <Table.Row key={index}>
                     <Table.Cell>{el.grid}</Table.Cell><Table.Cell>{`${h}.${min}.${sec}`}</Table.Cell>
                 </Table.Row>
