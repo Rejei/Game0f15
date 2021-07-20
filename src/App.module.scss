@@ -24,7 +24,7 @@
     flex-wrap: nowrap;
     flex: 1;
     flex-direction: column;
-    min-width: 75vw;
+    min-width: 50vw;
     border: 2px solid gray;
     position:relative;
     background-color: rgb(168, 193, 163);
@@ -47,9 +47,9 @@
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 5%;
+    top: 10%;
     width: 100%;
-    max-height: 30%;
+    min-height: 30%;
     font-size: 500%;
     font-family: 'Fredoka One', cursive;
     background-color: blanchedalmond;
@@ -120,7 +120,7 @@ thead {
 
 thead > tr {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 tbody {
     width: 100%;
@@ -133,6 +133,7 @@ $breakpoints: (phone: 320px, tablet: 768px, desktop: 1024px);
 @include media("<tablet") {
 .app{
     flex-direction: column;
+    min-width: 75vw;
     background-color: rgb(168, 193, 163);
     
 }
